@@ -1,12 +1,13 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:vinayas_culinary_delights/recent/recent_posts.dart';
 
 import 'category/category_page.dart';
 import 'drawer/app_drawer.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(CulinaryDelightsApp());
 
-class MyApp extends StatelessWidget {
+class CulinaryDelightsApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

@@ -34,6 +34,9 @@ class AppDrawer extends StatelessWidget {
             ListTile(
               leading: Icon(Icons.perm_device_information),
               title: Text('About the app'),
+                onTap: () {
+                  _aboutAppAlert(context);
+                }
             ),
             new Divider(),
             ListTile(
@@ -44,4 +47,26 @@ class AppDrawer extends StatelessWidget {
         )
     );
   }
+}
+
+Future<void> _aboutAppAlert(BuildContext context) {
+  return showDialog(
+    context: context,
+    builder: (_) => AlertDialog(
+        title: Text('Culinary Delights For Android'),
+        content: Text('Author: Vinaya Prabhu \n'
+            'Developer: Vinayak Prabhu\n'
+            'version: 1.0.0\n\n'
+            'vinayasculinarydelights.com'),
+        actions: <Widget>[
+          FlatButton(
+            child: Text('OK'),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      ),
+    barrierDismissible: true
+  );
 }

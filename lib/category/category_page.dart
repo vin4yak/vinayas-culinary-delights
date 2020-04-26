@@ -81,7 +81,7 @@ class CategoryScreenState extends State {
   _getCategories() {
     ServiceGateway.getPosts(categoryId).then((response) {
       setState(() {
-        Iterable list = json.decode(response.body);
+        Iterable list = json.decode(response);
         posts = list.map((model) => Post.fromJson(model)).toList();
       });
     });

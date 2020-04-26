@@ -22,9 +22,8 @@ class MainScreenState extends State {
   _getCategories() {
     ServiceGateway.getCategories().then((response) {
       setState(() {
-        Iterable list = json.decode(response.body);
+        Iterable list = json.decode(response);
         categories = list.map((model) => Category.fromJson(model)).toList();
-
       });
     });
   }

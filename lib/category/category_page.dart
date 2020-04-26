@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:html/parser.dart';
 import 'package:vinayas_culinary_delights/domain/category.dart';
+import 'package:vinayas_culinary_delights/util/progress_bar.dart';
 import 'package:vinayas_culinary_delights/util/text_util.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -71,6 +72,7 @@ class CategoryPage extends StatefulWidget {
 }
 
 class CategoryScreenState extends State {
+  bool isInProgress = true;
   final int categoryId;
   final String categoryName;
 
@@ -83,6 +85,7 @@ class CategoryScreenState extends State {
       setState(() {
         Iterable list = json.decode(response);
         posts = list.map((model) => Post.fromJson(model)).toList();
+        isInProgress = false;
       });
     });
   }
@@ -104,26 +107,30 @@ class CategoryScreenState extends State {
         appBar: AppBar(
           title: Text('Browse ' + categoryName),
         ),
-        body: ListView.builder(itemCount: posts.length,
-            itemBuilder: (context, index) {
-              return new InkWell(
-                  child: Card(
-                    child: ListTile(
-                      title: Text(TextUtil.unescapedText(posts[index].title.rendered),
-                          style: TextStyle(fontWeight: FontWeight.bold)),
-                      subtitle: Text(parse(posts[index].excerpt.rendered).body.text),
-                      trailing: Icon(Icons.open_in_new),
-                      onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (BuildContext context) => PostWebView(
-                                title: TextUtil.unescapedText(posts[index].title.rendered),
-                                url: posts[index].link
-                            )
-                        ));
-                      },
-                    ),
-                  ));
-            })
+        body: ProgressBar(
+            child: ListView.builder(itemCount: posts.length,
+                itemBuilder: (context, index) {
+                  return new InkWell(
+                      child: Card(
+                        child: ListTile(
+                          title: Text(TextUtil.unescapedText(posts[index].title.rendered),
+                              style: TextStyle(fontWeight: FontWeight.bold)),
+                          subtitle: Text(parse(posts[index].excerpt.rendered).body.text),
+                          trailing: Icon(Icons.open_in_new),
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (BuildContext context) => PostWebView(
+                                    title: TextUtil.unescapedText(posts[index].title.rendered),
+                                    url: posts[index].link
+                                )
+                            ));
+                          },
+                        ),
+                      ));
+                }),
+          inAsyncCall: isInProgress,
+          opacity: 0.5,
+        )
     );
   }
 }

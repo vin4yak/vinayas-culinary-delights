@@ -110,14 +110,14 @@ class CategoryScreenState extends State {
               return new InkWell(
                   child: Card(
                     child: ListTile(
-                      title: Text(posts[index].title.rendered,
+                      title: Text(TextUtil.unescapedText(posts[index].title.rendered),
                           style: TextStyle(fontWeight: FontWeight.bold)),
                       subtitle: Text(parse(posts[index].excerpt.rendered).body.text),
                       trailing: Icon(Icons.open_in_new),
                       onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: (BuildContext context) => PostWebView(
-                                title: posts[index].slug,
+                                title: TextUtil.unescapedText(posts[index].title.rendered),
                                 url: posts[index].link
                             )
                         ));

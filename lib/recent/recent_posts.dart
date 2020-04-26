@@ -54,7 +54,7 @@ class RecentPostScreenState extends State {
               onTap: () {
                 Navigator.of(context).push(MaterialPageRoute(
                     builder: (BuildContext context) => PostWebView(
-                        title: posts[index].slug,
+                        title: TextUtil.unescapedText(posts[index].title.rendered),
                         url: posts[index].link
                     )
                 ));

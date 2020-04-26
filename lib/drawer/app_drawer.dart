@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -19,8 +20,7 @@ class AppDrawer extends StatelessWidget {
               accountName: Text('Vinaya Prabhu'),
               accountEmail: Text('vinayasculinarydelights.com'),
               currentAccountPicture: new CircleAvatar(
-                //child: new Image.asset('assets/vinaya.jpg')
-                backgroundImage: new NetworkImage('http://vinayasculinarydelights.com/wp-content/uploads/2017/09/IMG_20170308_214839-01-01-01-02-01-01-01-267x300.jpg'),
+                backgroundImage: CachedNetworkImageProvider('http://vinayasculinarydelights.com/wp-content/uploads/2017/09/IMG_20170308_214839-01-01-01-02-01-01-01-267x300.jpg'),
               ),
             ),
             ListTile(

@@ -15,4 +15,9 @@ class ServiceGateway {
     return http.get(url);
   }
 
+  static Future getRecentPosts() {
+    var url = baseUrl + '/posts?per_page=10';
+    return http.get(url);
+  }
+
 }

@@ -4,10 +4,62 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:html/parser.dart';
+import 'package:vinayas_culinary_delights/domain/category.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 import '../domain/post.dart';
 import '../util/service_gateway.dart';
+
+class Categories extends StatefulWidget {
+  @override
+  createState() => MainScreenState();
+}
+
+class MainScreenState extends State {
+  var categories = List<Category>();
+
+  _getCategories() {
+    ServiceGateway.getCategories().then((response) {
+      setState(() {
+        Iterable list = json.decode(response.body);
+        categories = list.map((model) => Category.fromJson(model)).toList();
+
+      });
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _getCategories();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(itemCount: categories.length,
+        itemBuilder: (context, index) {
+          return Card(
+            child: ListTile(
+              title: Text(categories[index].name),
+              subtitle: Text(categories[index].description),
+              trailing: Icon(Icons.arrow_forward),
+              onTap: () {
+                navigateToRecipesPage(context, categories[index].id, categories[index].name);
+              },
+            ),
+          );
+        });
+  }
+}
+
+void navigateToRecipesPage(BuildContext context, int categoryId, String categoryName) {
+  Navigator.push(context, MaterialPageRoute(builder: (context) => CategoryPage(categoryId: categoryId, categoryName: categoryName,)));
+}
 
 class CategoryPage extends StatefulWidget {
   final int categoryId;
@@ -74,10 +126,6 @@ class CategoryScreenState extends State {
             })
     );
   }
-}
-
-void navigateToRecipesPage(BuildContext context, int categoryId, String categoryName) {
-  Navigator.push(context, MaterialPageRoute(builder: (context) => CategoryPage(categoryId: categoryId, categoryName: categoryName,)));
 }
 
 class PostWebView extends StatelessWidget {

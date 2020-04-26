@@ -7,6 +7,7 @@ import 'package:html_unescape/html_unescape.dart';
 import 'package:vinayas_culinary_delights/category/category_page.dart';
 import 'package:vinayas_culinary_delights/domain/post.dart';
 import 'package:vinayas_culinary_delights/util/service_gateway.dart';
+import 'package:vinayas_culinary_delights/util/text_util.dart';
 
 class RecentPostsPage extends StatefulWidget {
   @override
@@ -44,7 +45,7 @@ class RecentPostScreenState extends State {
     return ListView.builder(itemCount: posts.length, itemBuilder: (context, index) {
       return Card(
           child: ListTile(
-              title: Text(unescape.convert(posts[index].title.rendered),
+              title: Text(TextUtil.unescapedText(posts[index].title.rendered),
                   style: TextStyle(fontWeight: FontWeight.bold)),
               subtitle: Text(parse(posts[index].excerpt.rendered).body.text),
               trailing: Icon(Icons.open_in_new),

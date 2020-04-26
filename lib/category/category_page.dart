@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:html/parser.dart';
 import 'package:vinayas_culinary_delights/domain/category.dart';
+import 'package:vinayas_culinary_delights/util/text_util.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 import '../domain/post.dart';
@@ -45,7 +46,7 @@ class MainScreenState extends State {
         itemBuilder: (context, index) {
           return Card(
             child: ListTile(
-              title: Text(categories[index].name),
+              title: Text(TextUtil.unescapedText(categories[index].name)),
               subtitle: Text(categories[index].description),
               trailing: Icon(Icons.arrow_forward),
               onTap: () {

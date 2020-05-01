@@ -13,7 +13,8 @@ class CulinaryDelightsApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-          primarySwatch: Colors.teal
+        primarySwatch: Colors.teal,
+        brightness: Brightness.dark
       ),
       home: DefaultTabController(
         length: 2,

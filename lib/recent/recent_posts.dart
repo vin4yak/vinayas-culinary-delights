@@ -22,7 +22,7 @@ class RecentPostScreenState extends State {
   _getRecentPosts() {
     ServiceGateway.getRecentPosts().then((response){
       setState(() {
-        Iterable list = json.decode(response.body);
+        Iterable list = json.decode(response);
         posts = list.map((model) => Post.fromJson(model)).toList();
         isInProgress = false;
       });

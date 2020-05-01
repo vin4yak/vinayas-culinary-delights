@@ -23,9 +23,10 @@ class ServiceGateway {
     return response.readAsString();
   }
 
-  static Future getRecentPosts() {
+  static Future getRecentPosts() async {
     var url = baseUrl + '/posts?per_page=15';
-    return http.get(url);
+    var response = await CustomCacheManager().getSingleFile(url);
+    return response.readAsString();
   }
 
 }

@@ -43,28 +43,42 @@ class RecentPostScreenState extends State {
   @override
   Widget build(BuildContext context) {
     return ProgressBar(
-      child: ListView.builder(itemCount: posts.length, itemBuilder: (context, index) {
-        return Card(
-            child: ListTile(
-                title: Text(TextUtil.unescapedText(posts[index].title.rendered),
-                    style: TextStyle(fontWeight: FontWeight.bold)),
-                //subtitle: Text(parse(posts[index].excerpt.rendered).body.text), //Switch in case of excerpt
-                subtitle: ClipRRect(
-                  borderRadius: BorderRadius.circular(15.0),
-                  child: Image(image: CachedNetworkImageProvider(posts[index].featuredImage + '&resize=350%2C150')),
-                ),
-                trailing: Icon(Icons.open_in_new),
-                onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (BuildContext context) => PostWebView(
-                          title: TextUtil.unescapedText(posts[index].title.rendered),
-                          url: posts[index].link
-                      )
-                  ));
-                }
-            )
-        );
-      }),
+      child: ListView.builder(
+          itemCount: posts.length,
+          itemBuilder: (context, index) {
+            return Card(
+                child: ListTile(
+                    title: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                            TextUtil.unescapedText(posts[index].title.rendered),
+                            style: TextStyle(fontWeight: FontWeight.bold)
+                        )
+                    ),
+                    //subtitle: Text(parse(posts[index].excerpt.rendered).body.text), //Switch in case of excerpt
+                    subtitle: Padding(
+                        padding: EdgeInsets.only(top: 3),
+                        child: Align(
+                            alignment: Alignment.centerLeft,
+                            child:ClipRRect(
+                              borderRadius: BorderRadius.circular(5.0),
+                              child: Image(
+                                  image: CachedNetworkImageProvider(posts[index].featuredImage + '&resize=350%2C150')
+                              ),
+                            )
+                        )
+                    ),
+                    trailing: Icon(Icons.open_in_new),
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (BuildContext context) => PostWebView(
+                              title: TextUtil.unescapedText(posts[index].title.rendered),
+                              url: posts[index].link
+                          )
+                      ));
+                    })
+            );
+          }),
       inAsyncCall: isInProgress,
       opacity: 0.5,
     );

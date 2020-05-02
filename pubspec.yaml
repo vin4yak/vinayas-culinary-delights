@@ -40,7 +40,7 @@ dev_dependencies:
 flutter_icons:
   android: "launcher_icon"
   iso: true
-  image_path: "assets/vcd_icon.png"
+  image_path: "assets/vcd_icon_tomato.png"
 
 
 # For information on the generic Dart part of this file, see the

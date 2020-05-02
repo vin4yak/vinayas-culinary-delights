@@ -10,7 +10,7 @@
 
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="VCD Recipes"
+        android:label="VCD"
         android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"

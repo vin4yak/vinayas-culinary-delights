@@ -1,4 +1,4 @@
-package com.example.vinayas_culinary_delights
+package com.culinary.delights
 
 import androidx.annotation.NonNull;
 import io.flutter.embedding.android.FlutterActivity

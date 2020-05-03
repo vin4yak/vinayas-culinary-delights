@@ -1,10 +1,12 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:firebase_admob/firebase_admob.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:html/parser.dart';
 import 'package:vinayas_culinary_delights/domain/category.dart';
+import 'package:vinayas_culinary_delights/util/admob_properties.dart';
 import 'package:vinayas_culinary_delights/util/progress_bar.dart';
 import 'package:vinayas_culinary_delights/util/text_util.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -20,6 +22,27 @@ class Categories extends StatefulWidget {
 class MainScreenState extends State {
   var categories = List<Category>();
 
+  static const MobileAdTargetingInfo targetingInfo = MobileAdTargetingInfo(
+    testDevices: <String>[],
+    keywords: AdMobProperties.keywords,
+    contentUrl: 'https://vinayasculinarydelights.com',
+    nonPersonalizedAds: true,
+    childDirected: false
+  );
+
+  BannerAd _bannerAd;
+
+  BannerAd createBannerAd() {
+    return BannerAd(
+      adUnitId: AdMobProperties.bannerAdUnitId,
+      size: AdSize.largeBanner,
+      targetingInfo: targetingInfo,
+      listener: (MobileAdEvent event) {
+        print("BannerAd event $event");
+      },
+    );
+  }
+
   _getCategories() {
     ServiceGateway.getCategories().then((response) {
       setState(() {
@@ -33,10 +56,15 @@ class MainScreenState extends State {
   void initState() {
     super.initState();
     _getCategories();
+
+    FirebaseAdMob.instance.initialize(appId: AdMobProperties.appId);
+
+    _bannerAd = createBannerAd()..load()..show();
   }
 
   @override
   void dispose() {
+    _bannerAd?.dispose();
     super.dispose();
   }
 

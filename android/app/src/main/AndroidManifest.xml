@@ -7,6 +7,7 @@
          FlutterApplication and put your custom class here. -->
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
 
     <application
         android:name="io.flutter.app.FlutterApplication"
@@ -33,6 +34,10 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-4321781280842098~4333328926"/>
+<!--            android:value="ca-app-pub-3940256099942544~3347511713"/>-->
     </application>
 
 

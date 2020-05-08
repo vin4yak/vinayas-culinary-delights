@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:launch_review/launch_review.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AppDrawer extends StatelessWidget {
@@ -42,6 +43,9 @@ class AppDrawer extends StatelessWidget {
             ListTile(
               leading: Icon(Icons.rate_review),
               title: Text('Review app on Pay Store'),
+                onTap: () {
+                  LaunchReview.launch();
+                }
             ),
           ],
         )

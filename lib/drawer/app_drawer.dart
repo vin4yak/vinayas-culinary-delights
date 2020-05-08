@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +14,13 @@ class AppDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Map<String, dynamic> appInfo =
+    {
+      'appMarket': Platform.isAndroid? 'Play Store' : 'App Store',
+      'platform': Platform.isAndroid? 'Android' : 'iOS'
+    };
+    var authorAvatar = 'https://vinayasculinarydelights.com/images/vinaya.jpg';
+
     return Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
@@ -21,14 +30,14 @@ class AppDrawer extends StatelessWidget {
               accountName: Text('Vinaya Prabhu'),
               accountEmail: Text('vinayasculinarydelights.com'),
               currentAccountPicture: new CircleAvatar(
-                backgroundImage: CachedNetworkImageProvider('http://vinayasculinarydelights.com/wp-content/uploads/2017/09/IMG_20170308_214839-01-01-01-02-01-01-01-267x300.jpg'),
+                backgroundImage: CachedNetworkImageProvider(authorAvatar),
               ),
             ),
             ListTile(
                 leading: Icon(Icons.contact_mail),
                 title: Text('About the author'),
                 onTap: () {
-                  launch('http://vinayasculinarydelights.com/about-me/');
+                  launch('https://vinayasculinarydelights.com/about-me/');
                 }
             ),
             new Divider(),
@@ -36,13 +45,13 @@ class AppDrawer extends StatelessWidget {
               leading: Icon(Icons.perm_device_information),
               title: Text('About the app'),
                 onTap: () {
-                  _aboutAppAlert(context);
+                  _aboutAppAlert(context, appInfo);
                 }
             ),
             new Divider(),
             ListTile(
               leading: Icon(Icons.rate_review),
-              title: Text('Review app on Pay Store'),
+              title: Text('Review app on ' + appInfo['appMarket']),
                 onTap: () {
                   LaunchReview.launch();
                 }
@@ -53,14 +62,14 @@ class AppDrawer extends StatelessWidget {
   }
 }
 
-Future<void> _aboutAppAlert(BuildContext context) {
+Future<void> _aboutAppAlert(BuildContext context, Map<String, dynamic> appInfo) {
   return showDialog(
     context: context,
     builder: (_) => AlertDialog(
-        title: Text('Culinary Delights For Android'),
+        title: Text('Culinary Delights For ' + appInfo['platform']),
         content: Text('Author: Vinaya Prabhu \n'
             'Developer: Vinayak Prabhu\n'
-            'version: 1.0.0\n\n'
+            'version: 1.0.1\n\n'
             'vinayasculinarydelights.com'),
         actions: <Widget>[
           FlatButton(

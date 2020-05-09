@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:html/parser.dart';
 import 'package:vinayas_culinary_delights/domain/post.dart';
+import 'package:vinayas_culinary_delights/util/post_web_view.dart';
 import 'package:vinayas_culinary_delights/util/service_gateway.dart';
 import 'package:vinayas_culinary_delights/util/text_util.dart';
 
@@ -25,17 +26,20 @@ class _SearchPageState extends State {
           child: SearchBar<Post>(
             searchBarStyle: SearchBarStyle(
               borderRadius: BorderRadius.circular(7.0),
-              backgroundColor: Colors.white30
+              backgroundColor: Colors.white30,
+              padding: EdgeInsets.all(2),
             ),
+            minimumChars: 3,
             icon: Padding(
-                padding: EdgeInsets.only(left: 5),
+                padding: EdgeInsets.only(left: 7),
                 child: FaIcon(FontAwesomeIcons.search)
             ),
             onSearch: search,
-            placeHolder: Center(
-                child: Text('Find Amazing Recipes & More! Use Above Search Box')
+            placeHolder: Text('Find Amazing Recipes & More By Using Above Search Box!',
+                style: TextStyle(fontSize: 15)
             ),
-            emptyWidget: Text('No matching recipes found. Try changing your search.'),
+            emptyWidget: Text('No matching recipes found. Try changing your search.',
+                style: TextStyle(fontSize: 16)),
             onItemFound: (Post post, int index) {
               return new InkWell(
                   child: Card(
@@ -50,7 +54,12 @@ class _SearchPageState extends State {
                         ),
                         trailing: Icon(Icons.arrow_forward),
                         onTap: () {
-
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (BuildContext context) => PostWebView(
+                                  title: TextUtil.unescapedText(post.title.rendered),
+                                  url: post.link
+                              )
+                          ));
                         },
                       )
                   ));

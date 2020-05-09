@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'dart:convert';
 
 import 'package:firebase_admob/firebase_admob.dart';
@@ -7,9 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:html/parser.dart';
 import 'package:vinayas_culinary_delights/domain/category.dart';
 import 'package:vinayas_culinary_delights/util/admob_properties.dart';
+import 'package:vinayas_culinary_delights/util/post_web_view.dart';
 import 'package:vinayas_culinary_delights/util/progress_bar.dart';
 import 'package:vinayas_culinary_delights/util/text_util.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 
 import '../domain/post.dart';
 import '../util/service_gateway.dart';
@@ -161,33 +160,4 @@ class CategoryScreenState extends State {
         )
     );
   }
-}
-
-class PostWebView extends StatelessWidget {
-  final String title;
-  final String url;
-
-  final Completer<WebViewController> _controller = Completer<WebViewController>();
-
-  PostWebView({
-    @required this.title,
-    @required this.url
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-          title: Text(title)
-      ),
-      body: WebView(
-        initialUrl: url,
-        javascriptMode: JavascriptMode.unrestricted,
-        onWebViewCreated: (WebViewController webViewController) {
-          _controller.complete(webViewController);
-        },
-      ),
-    );
-  }
-
 }

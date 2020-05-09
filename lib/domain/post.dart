@@ -19,6 +19,8 @@ class Post {
     this.featuredImage = jetpack_featured_media_url;
   }
 
+  Post.search(this.title, this.excerpt);
+
   Post.fromJson(Map json)
       : id = json['id'],
         date = json['date'],

@@ -29,4 +29,10 @@ class ServiceGateway {
     return response.readAsString();
   }
 
+  static Future searchPosts(String searchText) async {
+    var url = baseUrl + '/posts?search=$searchText&per_page=20';
+    var response = await CustomCacheManager().getSingleFile(url);
+    return response.readAsString();
+  }
+
 }

@@ -34,6 +34,12 @@ class _SearchPageState extends State {
                 padding: EdgeInsets.only(left: 7),
                 child: FaIcon(FontAwesomeIcons.search)
             ),
+            debounceDuration: Duration(milliseconds: 1000),
+            hintText: 'Type Here...',
+            textStyle: TextStyle(
+              fontWeight: FontWeight.normal
+            ),
+            cancellationWidget: Text('Clear'),
             onSearch: search,
             placeHolder: Text('Find Amazing Recipes & More By Using Above Search Box!',
                 style: TextStyle(fontSize: 15)

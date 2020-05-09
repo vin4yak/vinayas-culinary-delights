@@ -1,10 +1,9 @@
-import 'dart:io';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:launch_review/launch_review.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:vinayas_culinary_delights/util/app_info.dart';
 
 class AppDrawer extends StatelessWidget {
 
@@ -14,11 +13,6 @@ class AppDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Map<String, dynamic> appInfo =
-    {
-      'appMarket': Platform.isAndroid? 'Play Store' : 'App Store',
-      'platform': Platform.isAndroid? 'Android' : 'iOS'
-    };
     var authorAvatar = 'https://vinayasculinarydelights.com/images/vinaya.jpg';
 
     return Drawer(
@@ -45,13 +39,13 @@ class AppDrawer extends StatelessWidget {
               leading: Icon(Icons.perm_device_information),
               title: Text('About the app'),
                 onTap: () {
-                  _aboutAppAlert(context, appInfo);
+                  _aboutAppAlert(context);
                 }
             ),
             new Divider(),
             ListTile(
               leading: Icon(Icons.rate_review),
-              title: Text('Review app on ' + appInfo['appMarket']),
+              title: Text('Review us on ' + AppInfo.fetch()['store']),
                 onTap: () {
                   LaunchReview.launch();
                 }
@@ -62,14 +56,19 @@ class AppDrawer extends StatelessWidget {
   }
 }
 
-Future<void> _aboutAppAlert(BuildContext context, Map<String, dynamic> appInfo) {
+Future<void> _aboutAppAlert(BuildContext context) {
+  String version;
+  AppInfo.version().then((value) {
+    version = value;
+  });
+
   return showDialog(
     context: context,
     builder: (_) => AlertDialog(
-        title: Text('Culinary Delights For ' + appInfo['platform']),
+        title: Text('Culinary Delights For ' + AppInfo.fetch()['platform']),
         content: Text('Author: Vinaya Prabhu \n'
             'Developer: Vinayak Prabhu\n'
-            'version: 1.0.1\n\n'
+            'version: $version\n\n'
             'vinayasculinarydelights.com'),
         actions: <Widget>[
           FlatButton(

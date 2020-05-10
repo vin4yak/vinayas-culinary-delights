@@ -34,7 +34,7 @@ class MainScreenState extends State {
   BannerAd createBannerAd() {
     return BannerAd(
       adUnitId: AdMobProperties.bannerAdUnitId,
-      size: AdSize.largeBanner,
+      size: AdSize.smartBanner,
       targetingInfo: targetingInfo,
       listener: (MobileAdEvent event) {
         print("BannerAd event $event");

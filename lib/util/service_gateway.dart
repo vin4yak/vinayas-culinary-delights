@@ -35,4 +35,10 @@ class ServiceGateway {
     return response.readAsString();
   }
 
+  static Future getAllFoodArt() async {
+    var url = 'https://vinayasculinarydelights.com/food_art.json';
+    var response = await CustomCacheManager().getSingleFile(url);
+    return response.readAsString();
+  }
+
 }

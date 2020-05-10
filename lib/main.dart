@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:vinayas_culinary_delights/art/food_art_page.dart';
 import 'package:vinayas_culinary_delights/recent/recent_posts.dart';
 import 'package:vinayas_culinary_delights/search/search_page.dart';
 
@@ -18,7 +19,7 @@ class CulinaryDelightsApp extends StatelessWidget {
         brightness: Brightness.dark
       ),
       home: DefaultTabController(
-        length: 3,
+        length: 4,
         child: MainPageWidget(),
       )
     );
@@ -35,7 +36,7 @@ class MainPageWidget extends StatelessWidget {
     return Scaffold(
       drawer: AppDrawer(),
       body: DefaultTabController(
-        length: 3,
+        length: 4,
         child: NestedScrollView(
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
             return <Widget>[
@@ -62,9 +63,10 @@ class MainPageWidget extends StatelessWidget {
                     labelColor: Colors.white,
                     unselectedLabelColor: Colors.grey,
                     tabs: [
-                      Tab(text: "Recent Posts"),
+                      Tab(text: "Recents"),
                       Tab(text: 'Search'),
                       Tab(text: "Categories"),
+                      Tab(text: "Food Art")
                     ],
                   ),
                 ),
@@ -76,7 +78,8 @@ class MainPageWidget extends StatelessWidget {
             children: [
               RecentPostsPage(),
               SearchPage(),
-              Categories()
+              Categories(),
+              FoodArtPage(),
             ],
           ),
         ),

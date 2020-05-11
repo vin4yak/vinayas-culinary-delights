@@ -18,7 +18,7 @@ class Categories extends StatefulWidget {
   createState() => MainScreenState();
 }
 
-class MainScreenState extends State {
+class MainScreenState extends State<Categories> {
   var categories = List<Category>();
 
   static const MobileAdTargetingInfo targetingInfo = MobileAdTargetingInfo(
@@ -98,7 +98,7 @@ class CategoryPage extends StatefulWidget {
   createState() => CategoryScreenState(categoryId, categoryName);
 }
 
-class CategoryScreenState extends State {
+class CategoryScreenState extends State<CategoryPage> {
   bool isInProgress = true;
   final int categoryId;
   final String categoryName;

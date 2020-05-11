@@ -13,7 +13,7 @@ class FoodArtPage extends StatefulWidget {
 
 }
 
-class _FoodArtPageState extends State {
+class _FoodArtPageState extends State<FoodArtPage> {
 
   var foodArt = List<FoodArt>();
 

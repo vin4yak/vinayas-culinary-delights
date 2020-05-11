@@ -15,7 +15,7 @@ class RecentPostsPage extends StatefulWidget {
 
 }
 
-class RecentPostScreenState extends State {
+class RecentPostScreenState extends State<RecentPostsPage> {
   bool isInProgress = true;
   var posts = List<Post>();
 
